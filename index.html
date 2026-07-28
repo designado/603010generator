@@ -8,16 +8,16 @@
   <title>60-30-10 Color Generator — Crie paletas harmônicas em segundos</title>
   <meta name="description" content="Gere paletas de cores harmônicas usando a regra 60-30-10. Escolha sua cor de destaque e obtenha automaticamente as cores dominante e secundária. Ferramenta gratuita para designers e desenvolvedores." />
   <meta name="keywords" content="paleta de cores, regra 60 30 10, gerador de paleta, harmonia de cores, color palette generator, cores complementares, design de interface, UI colors, ferramenta de cores, color theory" />
-  <meta name="author" content="designado" />
+  <meta name="author" content="60-30-10 Generator" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://603010.designado.com.br/" />
+  <link rel="canonical" href="https://603010generator.com/" />
 
   <!-- ─── Open Graph (Facebook, LinkedIn, WhatsApp) ────────────────────────── -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://603010.designado.com.br/" />
+  <meta property="og:url"         content="https://603010generator.com/" />
   <meta property="og:title"       content="60-30-10 Color Generator — Paletas harmônicas em segundos" />
   <meta property="og:description" content="Escolha uma cor de destaque e gere automaticamente uma paleta 60-30-10 com harmonia profissional. Trave cores, explore variações e faça preview em um layout real." />
-  <meta property="og:image"       content="https://603010.designado.com.br/assets/img/og-image.png" />
+  <meta property="og:image"       content="https://603010generator.com/assets/img/og-image.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale"      content="pt_BR" />
@@ -25,11 +25,10 @@
 
   <!-- ─── Twitter / X Card ─────────────────────────────────────────────────── -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:url"         content="https://603010.designado.com.br/" />
+  <meta name="twitter:url"         content="https://603010generator.com/" />
   <meta name="twitter:title"       content="60-30-10 Color Generator" />
   <meta name="twitter:description" content="Gere paletas de cores harmônicas com a regra 60-30-10. Ferramenta gratuita para designers e devs." />
-  <meta name="twitter:image"       content="https://603010.designado.com.br/assets/img/og-image.png" />
-  <meta name="twitter:creator"     content="@designado" />
+  <meta name="twitter:image"       content="https://603010generator.com/assets/img/og-image.png" />
 
   <!-- ─── Structured Data (JSON-LD) ───────────────────────────────────────── -->
   <script type="application/ld+json">
@@ -37,7 +36,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "60-30-10 Color Generator",
-    "url": "https://603010.designado.com.br/",
+    "url": "https://603010generator.com/",
     "description": "Ferramenta gratuita para gerar paletas de cores harmônicas usando a regra 60-30-10. Escolha uma cor de destaque e obtenha automaticamente dominante e secundária.",
     "applicationCategory": "DesignApplication",
     "operatingSystem": "Any",
@@ -48,8 +47,8 @@
     },
     "author": {
       "@type": "Person",
-      "name": "designado",
-      "url": "https://github.com/designado"
+      "name": "60-30-10 Generator",
+      "url": "https://603010generator.com/"
     },
     "keywords": "paleta de cores, regra 60-30-10, gerador de cores, harmonia de cores, color palette, design tool"
   }
@@ -76,30 +75,18 @@
     <p>Escolha uma cor de destaque e gere uma paleta harmônica 60-30-10 automaticamente</p>
   </header>
 
+  <button class="help-toggle" id="helpBtn" aria-label="Sobre o projeto">?</button>
+
   <!-- ─── Controls ───────────────────────────────────────────────────────── -->
-  <div class="controls">
+  <main>
+  <section class="controls" aria-label="Controles da paleta">
 
     <!-- Color picker circle -->
     <div class="color-picker-wrapper">
-      <label for="colorPicker">sua cor</label>
       <div class="color-swatch-btn" title="Abrir seletor de cores">
         <div class="color-swatch-bg" id="swatchBg"></div>
         <input type="color" id="colorPicker" value="#7c3aed" aria-label="Seletor de cor" />
       </div>
-    </div>
-
-    <!-- Hex text input -->
-    <div class="hex-input-wrapper">
-      <label for="hexInput">hex</label>
-      <input
-        type="text"
-        id="hexInput"
-        maxlength="7"
-        spellcheck="false"
-        autocomplete="off"
-        placeholder="#7C3AED"
-        aria-label="Código hexadecimal da cor"
-      />
     </div>
 
     <button class="regen-btn" id="regenBtn" aria-label="Gerar nova variação de paleta">
@@ -114,12 +101,10 @@
       Preview
     </button>
 
-    <div class="hint-mobile" style="display:none" aria-hidden="true"></div>
-
-  </div>
+  </section>
 
   <!-- ─── Palette ─────────────────────────────────────────────────────────── -->
-  <div class="palette-wrapper">
+  <section class="palette-wrapper" aria-label="Paleta de cores gerada">
     <div class="palette" id="palette" role="img" aria-label="Paleta de cores 60-30-10">
 
       <!-- 60% — Dominante -->
@@ -163,7 +148,7 @@
       </div>
 
     </div>
-  </div>
+  </section>
 
   <!-- ─── Harmony + lock status ───────────────────────────────────────────── -->
   <div class="meta-row">
@@ -180,9 +165,9 @@
   </div>
 
   <!-- ─── Values panel ────────────────────────────────────────────────────── -->
-  <div class="values-panel">
+  <section class="values-panel" aria-label="Valores da paleta">
 
-    <div class="value-card" id="card60">
+    <article class="value-card" id="card60">
       <div class="vc-top">
         <div class="vc-dot" id="dot60"></div>
         <span class="vc-label">60% — Dominante</span>
@@ -193,7 +178,7 @@
       </div>
       <div class="vc-hex" id="vhex60" title="Clique para copiar" role="button" tabindex="0">#000000</div>
       <div class="vc-rgb"  id="vrgb60">rgb(0, 0, 0)</div>
-    </div>
+    </article>
 
     <div class="value-card" id="card30">
       <div class="vc-top">
@@ -217,7 +202,7 @@
       <div class="vc-rgb"  id="vrgb10">rgb(0, 0, 0)</div>
     </div>
 
-  </div>
+  </section>
 
   <!-- ─── Sobre a regra (SEO content, visualmente discreto) ──────────────── -->
   <section class="about-rule" aria-label="Sobre a regra 60-30-10">
@@ -260,6 +245,21 @@
     </div>
 
   </footer>
+
+  <!-- ─── Help modal ─────────────────────────────────────────────────────────── -->
+  <div class="help-overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="help-modal">
+      <button class="help-close" id="helpClose" aria-label="Fechar">✕</button>
+      <h2 id="helpTitle">O que é 60-30-10?</h2>
+      <p>A regra 60-30-10 divide a paleta em três proporções para criar equilíbrio visual e hierarquia de cor.</p>
+      <ul>
+        <li><strong>60%</strong> — cor dominante para fundos e áreas maiores</li>
+        <li><strong>30%</strong> — cor secundária para elementos de suporte</li>
+        <li><strong>10%</strong> — cor de destaque, escolhida por você para chamar atenção</li>
+      </ul>
+      <p>Escolha apenas a cor de destaque. A ferramenta gera automaticamente as cores dominante e secundária de forma harmônica.</p>
+    </div>
+  </div>
 
   <!-- ─── Pix modal ────────────────────────────────────────────────────────── -->
   <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="QR Code Pix">

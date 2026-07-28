@@ -5,7 +5,6 @@ var currentPalette = {};
 
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
 var colorPicker   = document.getElementById('colorPicker');
-var hexInput      = document.getElementById('hexInput');
 var swatchBg      = document.getElementById('swatchBg');
 var regenBtn      = document.getElementById('regenBtn');
 var harmonyBadge  = document.getElementById('harmonyBadge');
@@ -84,9 +83,6 @@ function applyPalette(palette, skipAnimation) {
 
   // Picker swatch circle
   swatchBg.style.backgroundColor = c10;
-
-  // Hex text input
-  hexInput.value = c10.toUpperCase();
 
   // Pulse on unlocked swatches
   if (!skipAnimation) {
@@ -197,49 +193,10 @@ function regen() {
   applyPalette(palette);
 }
 
-// ─── Hex text input validation ────────────────────────────────────────────────
-function isValidHex(val) {
-  return /^#?[0-9a-fA-F]{6}$/.test(val.trim());
-}
-
-function normalizeHex(val) {
-  val = val.trim();
-  if (!val.startsWith('#')) val = '#' + val;
-  return val.toLowerCase();
-}
-
-hexInput.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') applyHexInput();
-});
-
-hexInput.addEventListener('blur', function() {
-  applyHexInput();
-});
-
-// prevent spacebar regen when typing in hex field
-hexInput.addEventListener('keydown', function(e) {
-  if (e.code === 'Space') e.stopPropagation();
-});
-
-function applyHexInput() {
-  var val = hexInput.value;
-  if (!isValidHex(val)) {
-    hexInput.value = baseColor.toUpperCase();
-    return;
-  }
-  var hex = normalizeHex(val);
-  baseColor = hex;
-  colorPicker.value = hex;
-  swatchBg.style.backgroundColor = hex;
-  resetLocks();
-  applyPalette(generatePalette(baseColor, { randomHarmony: true }));
-}
-
 // ─── Color picker sync ────────────────────────────────────────────────────────
 colorPicker.addEventListener('input', function(e) {
   baseColor = e.target.value;
   swatchBg.style.backgroundColor = baseColor;
-  hexInput.value = baseColor.toUpperCase();
   // stop invite animation once user picks a color
   document.querySelector('.color-swatch-btn').classList.add('used');
   resetLocks();
@@ -518,6 +475,7 @@ document.getElementById('palette').addEventListener('touchend', function(e) {
 
 // ─── Pix modal ───────────────────────────────────────────────────────────────
 var pixOverlay = document.getElementById('pixOverlay');
+var helpOverlay = document.getElementById('helpOverlay');
 
 document.getElementById('pixBtn').addEventListener('click', function() {
   pixOverlay.classList.add('open');
@@ -527,12 +485,27 @@ document.getElementById('pixClose').addEventListener('click', function() {
   pixOverlay.classList.remove('open');
 });
 
+document.getElementById('helpBtn').addEventListener('click', function() {
+  helpOverlay.classList.add('open');
+});
+
+document.getElementById('helpClose').addEventListener('click', function() {
+  helpOverlay.classList.remove('open');
+});
+
 pixOverlay.addEventListener('click', function(e) {
   if (e.target === pixOverlay) pixOverlay.classList.remove('open');
 });
 
+helpOverlay.addEventListener('click', function(e) {
+  if (e.target === helpOverlay) helpOverlay.classList.remove('open');
+});
+
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') pixOverlay.classList.remove('open');
+  if (e.key === 'Escape') {
+    pixOverlay.classList.remove('open');
+    helpOverlay.classList.remove('open');
+  }
 });
 
 
@@ -540,7 +513,6 @@ document.addEventListener('keydown', function(e) {
 // ─── Init ─────────────────────────────────────────────────────────────────────
 swatchBg.style.backgroundColor = baseColor;
 colorPicker.value = baseColor;
-hexInput.value = baseColor.toUpperCase();
 
 updateLockIcon(document.getElementById('lockBtn60'), false);
 updateLockIcon(document.getElementById('lockBtn30'), false);
