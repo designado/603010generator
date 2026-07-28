@@ -1,43 +1,33 @@
 # 60·30·10 Color Generator
 
-Uma ferramenta minimalista e gratuita para gerar paletas de cores harmônicas usando a **regra 60-30-10** — um dos princípios mais usados no design de interiores, UI/UX e identidade visual.
+Ferramenta leve para gerar paletas de cores harmoniosas usando a regra **60-30-10**. Ideal para designers, desenvolvedores e criadores que querem criar uma paleta equilibrada com apenas uma cor de destaque.
+
+![screenshot](assets/img/og-image.png)
 
 ---
 
-## O que é a regra 60-30-10?
+## Sobre
 
-A regra divide o uso de cores em três proporções:
+A regra 60-30-10 é uma técnica clássica de composição de cores que divide o layout em:
 
-| Proporção | Papel | Descrição |
-|-----------|-------|-----------|
-| **60%** | Dominante | A cor que ocupa mais espaço — fundos, superfícies neutras |
-| **30%** | Secundária | Complementa a dominante — menus, cards, seções de suporte |
-| **10%** | Destaque | Sua cor escolhida — botões, ícones, elementos de ação |
+- **60%** — cor dominante: grandes áreas e fundos
+- **30%** — cor secundária: elementos de suporte e seções de destaque
+- **10%** — cor de destaque: botões, ícones, detalhes e chamadas à ação
 
-O usuário define apenas a cor de **destaque (10%)**. A ferramenta gera automaticamente as outras duas com harmonia cromática real.
+Nesta ferramenta, você escolhe apenas a cor de destaque e o gerador cria automaticamente as cores dominante e secundária com harmonia cromática.
 
 ---
 
-## Funcionalidades
+## Recursos
 
-- 🎨 **Seletor de cor** — círculo com animação de convite, sincronizado com input hex
-- ⌨️ **Input hexadecimal** — digite diretamente o código da cor
-- 🔀 **Nova variação** — gera uma nova paleta preservando a cor base (`espaço` ou botão)
-- 🔒 **Travamento de cores** — trave o 60% ou 30% individualmente e continue variando o restante
-- 👁️ **Preview** — abre uma nova aba com um layout completo renderizado com a paleta ativa
-- 📋 **Copiar hex** — clique em qualquer código de cor para copiar
-- 🎯 **Título dinâmico** — os números 60·30·10 no topo refletem as cores da paleta em tempo real
-- 📱 **Responsivo** — faixas empilhadas verticalmente em mobile
-
-### Harmonias suportadas
-
-O algoritmo escolhe aleatoriamente entre cinco tipos de harmonia cromática:
-
-- Análoga
-- Complementar
-- Complementar Split
-- Tríade
-- Monocromática
+- 🎨 Seletor de cor visual com feedback de clique
+- 🔀 Geração de nova variação da paleta
+- 🔒 Trava individual para as cores 60% e 30%
+- 👁️ Preview de layout com a paleta ativa em nova janela
+- 📋 Clique para copiar códigos HEX
+- 🔍 Contraste automático de texto sobre cada cor
+- 📱 Layout responsivo para mobile e desktop
+- 🌈 Algoritmos de harmonia: análoga, complementar, split, tríade e monocromática
 
 ---
 
@@ -45,85 +35,85 @@ O algoritmo escolhe aleatoriamente entre cinco tipos de harmonia cromática:
 
 ```
 603010-generator/
-├── index.html          # Toda a estrutura HTML + SEO
+├── index.html          # Estrutura HTML e metadados SEO
 ├── assets/
 │   ├── css/
-│   │   └── style.css   # Estilos, responsividade, animações
+│   │   └── style.css   # Estilos, layout, responsividade e animações
 │   ├── js/
-│   │   ├── colors.js   # Utilitários de cor + gerador de harmonias
-│   │   └── app.js      # Lógica da UI, eventos, locks, preview, modal Pix
+│   │   ├── colors.js   # Funções de cor e geração de paletas
+│   │   └── app.js      # Comportamento da interface, eventos e preview
 │   └── img/
-│       ├── favicon.svg # Favicon SVG
-│       └── pix.JPG     # QR Code Pix (não incluso no repositório público)
+│       ├── favicon.svg # Favicon
+│       └── pix.JPG     # QR Code Pix
 └── README.md
 ```
 
-> **Sem dependências externas.** Nenhum framework, nenhum bundler, nenhuma biblioteca. JavaScript puro (`var`, sem módulos ES) para funcionar diretamente via `file://` sem servidor.
+> Projeto sem dependências externas. Funciona com HTML, CSS e JavaScript puros diretamente no browser.
 
 ---
 
-## Como usar localmente
+## Uso local
+
+1. Clone o repositório:
 
 ```bash
-git clone https://github.com/designado/603010-generator.git
+git clone https://github.com/603010generator/603010-generator.git
 cd 603010-generator
 ```
 
-Abra o `index.html` diretamente no browser. Não precisa de servidor.
+2. Abra `index.html` no navegador.
+
+Não é necessário servidor.
 
 ---
 
-## Como funciona o gerador de cores
+## Como funciona o gerador
 
-Todo o algoritmo vive em `assets/js/colors.js`.
+A lógica principal está em `assets/js/colors.js`.
 
-### Pipeline
+1. A cor do usuário é lida como um valor HEX
+2. Ela é convertida para HSL
+3. O gerador escolhe uma harmonia e ajusta a matiz
+4. As cores resultantes voltam para HEX
+5. O app aplica a paleta no DOM com contraste de texto automático
 
-```
-cor do usuário (hex)
-    ↓
-hexToHsl()          — converte para HSL
-    ↓
-harmony.generate()  — aplica rotação de matiz + jitter aleatório
-    ↓
-hslToHex()          — converte de volta para hex
-    ↓
-applyPalette()      — atualiza o DOM com contraste automático
-```
+### Locks de cor
 
-### Contraste automático
-
-A função `luminance()` calcula a luminância relativa (WCAG 2.1) de cada cor gerada. Com base nisso, `textColor()` decide se o texto sobre aquela cor deve ser claro ou escuro — garantindo legibilidade em qualquer paleta.
-
-### Travamento de cores
-
-O estado de lock (`locked.c60`, `locked.c30`) é passado para `generatePalette()`, que preserva as cores travadas e gera apenas as livres. Quando ambas estão travadas, `randomHarmony` é desativado para que a harmonia não mude.
+O estado de travamento (`locked.c60`, `locked.c30`) preserva a cor correspondente ao gerar novas variações.
 
 ---
 
-## SEO
+## Atualizações de SEO e domínio
 
-A página inclui:
+As tags principais já estão configuradas para `https://603010generator.com`:
 
-- Meta tags completas (`description`, `keywords`, `author`, `robots`, `canonical`)
-- Open Graph para compartilhamento no WhatsApp, LinkedIn e Facebook
+- `title`
+- `description`
+- `canonical`
+- Open Graph
 - Twitter/X Card
-- JSON-LD Schema.org (`WebApplication`)
-- Conteúdo textual semântico explicando a regra 60-30-10
+- JSON-LD Schema.org
 
-Para a imagem OG funcionar, crie `assets/img/og-image.png` com 1200×630px.
+Atualize as URLs e imagens OG antes de publicar em outro domínio.
 
 ---
 
-## Apoie o projeto
+## Personalização
 
-Se esta ferramenta foi útil, considere apoiar:
+- Substitua o QR Code Pix em `assets/img/pix.JPG` se desejar usar outra chave
+- Ajuste o link de suporte no botão do GitHub em `index.html`
+- Configure o favicon ou outros ativos em `assets/img`
 
-- ❤️ [GitHub Sponsors](https://github.com/sponsors/designado)
-- 💚 Pix — escaneie o QR Code dentro da própria ferramenta
+---
+
+## Dicas de publicação
+
+- Use `assets/img/og-image.png` com 1200×630px para redes sociais
+- Verifique se o `canonical` aponta para o domínio real
+- Garanta que o `title` e a `description` reflitam o nome do projeto
 
 ---
 
 ## Licença
 
-MIT — use, modifique e distribua livremente. Atribuição é bem-vinda mas não obrigatória.
+MIT — sinta-se livre para usar, modificar e distribuir.
