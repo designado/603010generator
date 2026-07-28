@@ -290,10 +290,8 @@ function openPreview() {
   var surfaceAlpha = luminance(c60) > 0.35 ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
   var surfaceBorder = luminance(c60) > 0.35 ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)';
 
-  // unsplash seeds — deterministic from palette so it looks intentional
-  var seeds = ['nature','architecture','design','minimal','texture'];
-  var seed  = seeds[Math.floor(Math.random() * seeds.length)];
-  var imgBase = 'https://source.unsplash.com/featured/';
+  // picsum.photos — gratuito, sem autenticação, imagens aleatórias por seed numérico
+  var baseId = Math.floor(Math.random() * 900) + 100; // seed base aleatório
 
   var html = '<!DOCTYPE html><html lang="pt-BR"><head>' +
     '<meta charset="UTF-8"/>' +
@@ -416,7 +414,7 @@ function openPreview() {
           '<button class="btn-secondary">Ver demonstração</button>' +
         '</div>' +
       '</div>' +
-      '<div class="hero-img"><img src="' + imgBase + '800x600/?' + seed + ',1" alt="Hero"/></div>' +
+      '<div class="hero-img"><img src="https://picsum.photos/seed/' + baseId + '/800/600" alt="Hero"/></div>' +
     '</section>' +
 
     /* STATS */
@@ -446,11 +444,11 @@ function openPreview() {
       '<div class="section-label">Galeria</div>' +
       '<div class="section-title" style="margin-bottom:1.5rem">Veja em ação</div>' +
       '<div class="gallery-grid">' +
-        '<div class="gallery-item"><img src="' + imgBase + '600x500/?' + seed + ',2" alt=""/></div>' +
-        '<div class="gallery-item"><img src="' + imgBase + '400x200/?' + seed + ',3" alt=""/></div>' +
-        '<div class="gallery-item"><img src="' + imgBase + '400x200/?' + seed + ',4" alt=""/></div>' +
-        '<div class="gallery-item"><img src="' + imgBase + '400x200/?' + seed + ',5" alt=""/></div>' +
-        '<div class="gallery-item"><img src="' + imgBase + '400x200/?' + seed + ',6" alt=""/></div>' +
+        '<div class="gallery-item"><img src="https://picsum.photos/seed/' + (baseId+1) + '/600/500" alt=""/></div>' +
+        '<div class="gallery-item"><img src="https://picsum.photos/seed/' + (baseId+2) + '/400/300" alt=""/></div>' +
+        '<div class="gallery-item"><img src="https://picsum.photos/seed/' + (baseId+3) + '/400/300" alt=""/></div>' +
+        '<div class="gallery-item"><img src="https://picsum.photos/seed/' + (baseId+4) + '/400/300" alt=""/></div>' +
+        '<div class="gallery-item"><img src="https://picsum.photos/seed/' + (baseId+5) + '/400/300" alt=""/></div>' +
       '</div>' +
     '</section>' +
 
@@ -458,7 +456,7 @@ function openPreview() {
     '<section class="testimonial">' +
       '<p class="quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."</p>' +
       '<div class="quote-author">' +
-        '<div class="author-avatar"><img src="' + imgBase + '80x80/?face,1" alt=""/></div>' +
+        '<div class="author-avatar"><img src="https://picsum.photos/seed/' + (baseId+6) + '/80/80" alt=""/></div>' +
         '<div><div class="author-name">Maria Silva</div><div class="author-role">CEO, Empresa Lorem</div></div>' +
       '</div>' +
     '</section>' +
