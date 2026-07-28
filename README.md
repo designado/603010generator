@@ -101,34 +101,6 @@ O estado de lock (`locked.c60`, `locked.c30`) é passado para `generatePalette()
 
 ---
 
-## Personalização
-
-### Trocar a chave Pix
-
-Em `assets/js/app.js`, localize:
-
-```js
-var PIX_KEY = 'YOUR_PIX_KEY';
-```
-
-Substitua pelo seu email, CPF, telefone ou chave aleatória Pix. A imagem do QR Code fica em `assets/img/pix.JPG` — substitua pelo seu próprio.
-
-### Trocar o link do GitHub Sponsors
-
-Em `index.html`, localize:
-
-```html
-<a ... href="https://github.com/sponsors/designado" ...>
-```
-
-Substitua pela sua URL.
-
-### URL canônica e meta OG
-
-Em `index.html`, atualize as URLs nas tags `<link rel="canonical">` e `<meta property="og:url">` para o seu domínio real antes de publicar.
-
----
-
 ## SEO
 
 A página inclui:
