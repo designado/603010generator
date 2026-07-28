@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ─── Primary SEO ──────────────────────────────────────────────────────── -->
+  <title>60-30-10 Color Generator — Crie paletas harmônicas em segundos</title>
+  <meta name="description" content="Gere paletas de cores harmônicas usando a regra 60-30-10. Escolha sua cor de destaque e obtenha automaticamente as cores dominante e secundária. Ferramenta gratuita para designers e desenvolvedores." />
+  <meta name="keywords" content="paleta de cores, regra 60 30 10, gerador de paleta, harmonia de cores, color palette generator, cores complementares, design de interface, UI colors, ferramenta de cores, color theory" />
+  <meta name="author" content="designado" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://603010.designado.com.br/" />
+
+  <!-- ─── Open Graph (Facebook, LinkedIn, WhatsApp) ────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://603010.designado.com.br/" />
+  <meta property="og:title"       content="60-30-10 Color Generator — Paletas harmônicas em segundos" />
+  <meta property="og:description" content="Escolha uma cor de destaque e gere automaticamente uma paleta 60-30-10 com harmonia profissional. Trave cores, explore variações e faça preview em um layout real." />
+  <meta property="og:image"       content="https://603010.designado.com.br/assets/img/og-image.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="pt_BR" />
+  <meta property="og:site_name"   content="60-30-10 Generator" />
+
+  <!-- ─── Twitter / X Card ─────────────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://603010.designado.com.br/" />
+  <meta name="twitter:title"       content="60-30-10 Color Generator" />
+  <meta name="twitter:description" content="Gere paletas de cores harmônicas com a regra 60-30-10. Ferramenta gratuita para designers e devs." />
+  <meta name="twitter:image"       content="https://603010.designado.com.br/assets/img/og-image.png" />
+  <meta name="twitter:creator"     content="@designado" />
+
+  <!-- ─── Structured Data (JSON-LD) ───────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "60-30-10 Color Generator",
+    "url": "https://603010.designado.com.br/",
+    "description": "Ferramenta gratuita para gerar paletas de cores harmônicas usando a regra 60-30-10. Escolha uma cor de destaque e obtenha automaticamente dominante e secundária.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "designado",
+      "url": "https://github.com/designado"
+    },
+    "keywords": "paleta de cores, regra 60-30-10, gerador de cores, harmonia de cores, color palette, design tool"
+  }
+  </script>
+
+  <!-- ─── Favicon ──────────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+  <!-- ─── Styles ───────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ─── Header ─────────────────────────────────────────────────────────── -->
+  <header>
+    <div class="logo-text">
+      <span class="logo-60" id="logoNum60">60</span>
+      <span class="logo-sep">·</span>
+      <span class="logo-30" id="logoNum30">30</span>
+      <span class="logo-sep">·</span>
+      <span class="logo-10" id="logoNum10">10</span>
+      <span class="logo-gen">generator</span>
+    </div>
+    <p>Escolha uma cor de destaque e gere uma paleta harmônica 60-30-10 automaticamente</p>
+  </header>
+
+  <!-- ─── Controls ───────────────────────────────────────────────────────── -->
+  <div class="controls">
+
+    <!-- Color picker circle -->
+    <div class="color-picker-wrapper">
+      <label for="colorPicker">sua cor</label>
+      <div class="color-swatch-btn" title="Abrir seletor de cores">
+        <div class="color-swatch-bg" id="swatchBg"></div>
+        <input type="color" id="colorPicker" value="#7c3aed" aria-label="Seletor de cor" />
+      </div>
+    </div>
+
+    <!-- Hex text input -->
+    <div class="hex-input-wrapper">
+      <label for="hexInput">hex</label>
+      <input
+        type="text"
+        id="hexInput"
+        maxlength="7"
+        spellcheck="false"
+        autocomplete="off"
+        placeholder="#7C3AED"
+        aria-label="Código hexadecimal da cor"
+      />
+    </div>
+
+    <button class="regen-btn" id="regenBtn" aria-label="Gerar nova variação de paleta">
+      ↻ Nova variação &nbsp;<kbd>espaço</kbd>
+    </button>
+
+    <button class="preview-btn" id="previewBtn" aria-label="Abrir preview da paleta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      Preview
+    </button>
+
+    <div class="hint-mobile" style="display:none" aria-hidden="true"></div>
+
+  </div>
+
+  <!-- ─── Palette ─────────────────────────────────────────────────────────── -->
+  <div class="palette-wrapper">
+    <div class="palette" id="palette" role="img" aria-label="Paleta de cores 60-30-10">
+
+      <!-- 60% — Dominante -->
+      <div class="swatch swatch-60" id="s60">
+        <div class="badge-area">
+          <button class="lock-btn" id="lockBtn60" title="Travar esta cor" aria-label="Travar cor 60%">
+            <svg viewBox="0 0 24 24" aria-hidden="true"></svg>
+          </button>
+        </div>
+        <span class="swatch-percentage" aria-hidden="true">60%</span>
+        <div class="swatch-label">
+          <span class="swatch-hex" id="hex60" title="Clique para copiar" role="button" tabindex="0">#000000</span>
+          <span class="swatch-role">Dominante</span>
+        </div>
+      </div>
+
+      <!-- 30% — Secundária -->
+      <div class="swatch swatch-30" id="s30">
+        <div class="badge-area">
+          <button class="lock-btn" id="lockBtn30" title="Travar esta cor" aria-label="Travar cor 30%">
+            <svg viewBox="0 0 24 24" aria-hidden="true"></svg>
+          </button>
+        </div>
+        <span class="swatch-percentage" aria-hidden="true">30%</span>
+        <div class="swatch-label">
+          <span class="swatch-hex" id="hex30" title="Clique para copiar" role="button" tabindex="0">#000000</span>
+          <span class="swatch-role">Secundária</span>
+        </div>
+      </div>
+
+      <!-- 10% — cor do usuário, sem cadeado -->
+      <div class="swatch swatch-10" id="s10">
+        <div class="badge-area">
+          <span class="user-badge">sua cor</span>
+        </div>
+        <span class="swatch-percentage" aria-hidden="true">10%</span>
+        <div class="swatch-label">
+          <span class="swatch-hex" id="hex10" title="Clique para copiar" role="button" tabindex="0">#000000</span>
+          <span class="swatch-role">Destaque</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Harmony + lock status ───────────────────────────────────────────── -->
+  <div class="meta-row">
+    <div class="harmony-info">
+      Harmonia: <span class="harmony-badge" id="harmonyBadge">—</span>
+    </div>
+    <div class="lock-status" id="lockStatus" aria-live="polite">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+      </svg>
+      <span id="lockStatusTxt">Clique no cadeado para travar uma cor</span>
+    </div>
+  </div>
+
+  <!-- ─── Values panel ────────────────────────────────────────────────────── -->
+  <div class="values-panel">
+
+    <div class="value-card" id="card60">
+      <div class="vc-top">
+        <div class="vc-dot" id="dot60"></div>
+        <span class="vc-label">60% — Dominante</span>
+        <svg class="vc-lock-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <div class="vc-hex" id="vhex60" title="Clique para copiar" role="button" tabindex="0">#000000</div>
+      <div class="vc-rgb"  id="vrgb60">rgb(0, 0, 0)</div>
+    </div>
+
+    <div class="value-card" id="card30">
+      <div class="vc-top">
+        <div class="vc-dot" id="dot30"></div>
+        <span class="vc-label">30% — Secundária</span>
+        <svg class="vc-lock-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <div class="vc-hex" id="vhex30" title="Clique para copiar" role="button" tabindex="0">#000000</div>
+      <div class="vc-rgb"  id="vrgb30">rgb(0, 0, 0)</div>
+    </div>
+
+    <div class="value-card" id="card10">
+      <div class="vc-top">
+        <div class="vc-dot" id="dot10"></div>
+        <span class="vc-label">10% — Destaque (sua cor)</span>
+      </div>
+      <div class="vc-hex" id="vhex10" title="Clique para copiar" role="button" tabindex="0">#000000</div>
+      <div class="vc-rgb"  id="vrgb10">rgb(0, 0, 0)</div>
+    </div>
+
+  </div>
+
+  <!-- ─── Sobre a regra (SEO content, visualmente discreto) ──────────────── -->
+  <section class="about-rule" aria-label="Sobre a regra 60-30-10">
+    <div class="about-grid">
+      <div class="about-item">
+        <span class="about-num">60%</span>
+        <p>A cor <strong>dominante</strong> ocupa a maior parte do espaço — fundos, áreas neutras, superfícies principais. Costuma ser mais suave ou neutra para não sobrecarregar a composição.</p>
+      </div>
+      <div class="about-item">
+        <span class="about-num">30%</span>
+        <p>A cor <strong>secundária</strong> complementa a dominante e cria profundidade. Aparece em elementos de suporte como menus, sidebars, cards e seções de destaque.</p>
+      </div>
+      <div class="about-item">
+        <span class="about-num">10%</span>
+        <p>A cor de <strong>destaque</strong> é a sua escolha — a mais vibrante e marcante. Usada em botões, ícones, links e detalhes que precisam chamar atenção.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+
+    <p class="support-title">Ajude a manter este projeto vivo</p>
+
+    <div class="support-btns">
+      <a class="support-btn support-github" href="https://github.com/sponsors/designado" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+        ❤️ Apoie este projeto
+      </a>
+
+      <button class="support-btn support-pix" id="pixBtn" aria-label="Pagar via Pix">
+        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+          <path d="M362.29 346.66a62.62 62.62 0 0 1-44.43-18.38l-69.64-69.64a11.37 11.37 0 0 0-15.63 0l-69.93 69.93a62.61 62.61 0 0 1-44.43 18.38h-13.7l88.33 88.33a64.44 64.44 0 0 0 91.05 0l88.62-88.62zM118.33 165.34a62.61 62.61 0 0 1 44.43 18.38l69.93 69.93a11.06 11.06 0 0 0 15.63 0l69.64-69.64a62.62 62.62 0 0 1 44.43-18.38h12l-88.62-88.62a64.44 64.44 0 0 0-91.05 0l-88.33 88.33z"/>
+          <path d="M467.53 210.94l-61.44-61.44h-43.8a39.35 39.35 0 0 0-27.92 11.56l-69.64 69.64a34.87 34.87 0 0 1-24.41 10 34.87 34.87 0 0 1-24.41-10l-69.93-69.93a39.35 39.35 0 0 0-27.92-11.56H73.91L12.47 210.94a64.44 64.44 0 0 0 0 91.05l61.44 61.44h44.15a39.35 39.35 0 0 0 27.92-11.56l69.93-69.93a34.72 34.72 0 0 1 48.82 0l69.64 69.64a39.35 39.35 0 0 0 27.92 11.56h43.8l61.44-61.44a64.44 64.44 0 0 0 0-91.76z"/>
+        </svg>
+        Pague-me uma coxinha
+      </button>
+    </div>
+
+  </footer>
+
+  <!-- ─── Pix modal ────────────────────────────────────────────────────────── -->
+  <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="QR Code Pix">
+    <div class="pix-modal">
+      <button class="pix-close" id="pixClose" aria-label="Fechar">✕</button>
+      <p class="pix-title">Me pague uma coxinha...</p>
+      <div class="pix-qr">
+        <img src="assets/img/pix.JPG" alt="QR Code Pix" width="220" height="220" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts — carregados após todo o DOM estar pronto -->
+  <script src="assets/js/colors.js"></script>
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
